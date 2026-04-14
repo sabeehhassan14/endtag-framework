@@ -10,13 +10,13 @@
 @custom-media --viewport-sm-up (width >= 480px);
 @custom-media --viewport-md-up (width >= 768px);
 @custom-media --viewport-lg-up (width >= 992px);
-@custom-media --viewport-xl-up (width >= 1366px); /* Upgraded to 1366px */
+@custom-media --viewport-xl-up (width >= 1366px);
 
 /* Down (Desktop First) */
 @custom-media --viewport-sm-down (width <= 479px);
 @custom-media --viewport-md-down (width <= 767px);
 @custom-media --viewport-lg-down (width <= 991px);
-@custom-media --viewport-xl-down (width <= 1365px); /* Upgraded to 1365px */
+@custom-media --viewport-xl-down (width <= 1365px);
 
 /* ==========================================================================
    1. VARIABLES & TOKENS
@@ -233,7 +233,6 @@ main::before {
 .has-fade-in.is-visible { opacity: 1; transform: translateY(0); }
 
 /* --- LCP / BOT OPTIMIZATION --- */
-/* Instantly reveals Above-The-Fold content if the HTML tag has the no-atf-animation class */
 .no-atf-animation main > section:first-of-type .has-fade-in {
   opacity: 1 !important;
   transform: none !important;
@@ -249,7 +248,6 @@ main::before {
 }
 
 /* --- ETCH BUILDER OVERRIDE --- */
-/* Disables the starting state of the animation when inside the Etch iframe */
 .is-etch-builder .has-fade-in {
   opacity: 1 !important;
   transform: translateY(0) !important;
@@ -273,7 +271,6 @@ main::before {
   width: 100%; 
   max-width: var(--container-max); 
   margin-inline: auto; 
-  /* Fallback padding just in case a container is used outside a section */
   padding-inline: var(--container-padding); 
   position: relative; 
   z-index: 2; 
@@ -296,10 +293,7 @@ main::before {
 /* Grid items are excellent containers for their internal components */
 .grid > * { container-type: inline-size; }
 
-/* Upgraded Grid Divider:
-  Flips based on the *container* width, not the whole viewport screen.
-  This means if a grid is placed inside a narrow sidebar, it natively stacks correctly!
-*/
+/* Upgraded Grid Divider */
 .grid-items-divider {
   :has(> &) {
     container-type: inline-size;
@@ -399,17 +393,15 @@ html[data-theme="dark"] .theme-toggle .moon-icon { opacity: 0; transform: transl
 .card > img, .card > .img-placeholder { width: 100%; border-radius: var(--radius-sm); }
 
 /* Card Row Modifier - Mobile First CQ */
-/* It acts like a regular column card natively. ONLY if there is enough space does it stretch into a row! */
 @container (min-width: 400px) {
   .card--row { flex-direction: row; flex-wrap: wrap; align-items: center; }
   .card--row > img, .card--row > .img-placeholder { width: 150px; height: 150px; flex-shrink: 0; }
 }
 
-/* --- Section Labels (Upgraded with Container Queries) --- */
+/* --- Section Labels --- */
 .section-label { 
   display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-1); width: 100%; margin-bottom: var(--space-1); text-align: left; flex-direction: row; 
   
-  /* Force the direct parent to become a container automatically */
   :has(> &) {
     container-type: inline-size;
   }
@@ -437,7 +429,6 @@ html[data-theme="dark"] .theme-toggle .moon-icon { opacity: 0; transform: transl
 .section-label--secondary .section-label__line::before { background: linear-gradient(to right, color-mix(in srgb, var(--text-brand-secondary), transparent 40%), color-mix(in srgb, var(--text-brand-secondary), transparent 70%)); }
 .section-label--secondary.section-label--reversed .section-label__line::before { background: linear-gradient(to left, color-mix(in srgb, var(--text-brand-secondary), transparent 40%), color-mix(in srgb, var(--text-brand-secondary), transparent 70%)); }
 
-/* CQ Tablet Breakpoint for Labels */
 @container (max-width: 600px) { 
   .section-label { gap: var(--space-0-5); flex-direction: row !important; } 
   .section-label__icon { width: 55px; height: 11px; } 
@@ -448,7 +439,6 @@ html[data-theme="dark"] .theme-toggle .moon-icon { opacity: 0; transform: transl
   .section-label--secondary .section-label__line::before { background: linear-gradient(to right, color-mix(in srgb, var(--text-brand-secondary), transparent 40%), color-mix(in srgb, var(--text-brand-secondary), transparent 70%)) !important; }
 }
 
-/* CQ Mobile Breakpoint for Labels */
 @container (max-width: 400px) {
   .section-label { flex-direction: column !important; align-items: flex-start; gap: var(--space-0-5); }
   .section-label__line { flex-basis: auto; order: 0; margin-top: 0; }
